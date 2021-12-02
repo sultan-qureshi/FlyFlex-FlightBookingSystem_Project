@@ -13,3 +13,7 @@ zuul:
   routes:
       flight-search:
         url: http://localhost:9001
+      user-login:
+        url: http://localhost:9002
+      user-signup:
+        url: http://localhost:9003
