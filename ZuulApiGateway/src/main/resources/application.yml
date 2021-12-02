@@ -1,0 +1,15 @@
+server:
+  port: 8081
+  
+spring:
+  application:
+    name: Zuul-Api-Gateway
+    
+eureka:
+  instance:
+    hostname: localhost
+
+zuul:
+  routes:
+      flight-search:
+        url: http://localhost:9001
