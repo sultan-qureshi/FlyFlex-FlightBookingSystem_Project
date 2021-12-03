@@ -28,9 +28,7 @@ public class Flight {
 	@Field
 	private LocalDateTime ArrivalDateAndTime;
 	@Field
-	private double EconomyClassPrice;
-	@Field
-	private double BusinessClassPrice;
+	private double TicketPrice;
 
 
 
@@ -115,22 +113,13 @@ public class Flight {
 	}
 
 
-	public double getEconomyClassPrice() {
-		return EconomyClassPrice;
+	public double getTicketPrice() {
+		return TicketPrice;
 	}
 
 
-	public void setEconomyClassPrice(double economyClassPrice) {
-		EconomyClassPrice = economyClassPrice;
+	public void setTicketPrice(double ticketPrice) {
+		TicketPrice = ticketPrice;
 	}
-
-
-	public double getBusinessClassPrice() {
-		return BusinessClassPrice;
-	}
-
-
-	public void setBusinessClassPrice(double businessClassPrice) {
-		BusinessClassPrice = businessClassPrice;
-	}
+	
 }
