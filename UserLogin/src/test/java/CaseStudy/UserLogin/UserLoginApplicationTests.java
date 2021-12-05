@@ -1,10 +1,10 @@
-package CaseStudy.FlightSearch;
+package CaseStudy.UserLogin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FlightSearchApplicationTests {
+class UserLoginApplicationTests {
 
 	@Test
 	void contextLoads() {

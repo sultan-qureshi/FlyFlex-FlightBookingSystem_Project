@@ -1,4 +1,4 @@
-package CaseStudy.FlightSearch.Model;
+package CaseStudy.UserLogin.Model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

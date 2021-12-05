@@ -1,4 +1,4 @@
-package CaseStudy.FlightSearch.Repository;
+package CaseStudy.UserLogin.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import CaseStudy.FlightSearch.Model.Flight;
+import CaseStudy.UserLogin.Model.Flight;
 
 @Repository
 public interface FlightRepository extends MongoRepository<Flight, String> {
