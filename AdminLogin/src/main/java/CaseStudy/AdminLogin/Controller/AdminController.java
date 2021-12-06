@@ -38,7 +38,7 @@ public class AdminController {
 	
 	@GetMapping("/")
 	public String home() {
-		return "Welocome User";
+		return "Welocome Admin";
 	}
 	@PostMapping("/authenticate")
 	public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest ) throws Exception {
