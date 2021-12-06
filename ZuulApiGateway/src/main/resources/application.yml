@@ -11,9 +11,7 @@ eureka:
 
 zuul:
   routes:
-      flight-search:
+      user-service:
         url: http://localhost:9001
-      user-login:
+      admin-service:
         url: http://localhost:9002
-      user-signup:
-        url: http://localhost:9003
