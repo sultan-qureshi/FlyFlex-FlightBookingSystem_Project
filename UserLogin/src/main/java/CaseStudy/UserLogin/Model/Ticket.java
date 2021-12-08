@@ -1,7 +1,5 @@
 package CaseStudy.UserLogin.Model;
 
-import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -9,119 +7,119 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection="Tickets")
 public class Ticket {
 	@Id
-	private String TicketId;
+	private String ticketId;
 	@Field
-	private String FlightNo;
+	private String fullName;
 	@Field
-	private String FullName;
+	private String email;
 	@Field
-	private String Email;
+	private String phoneNo;
 	@Field
-	private String PhoneNo;
+	private String seatNo;
 	@Field
-	private String Origin;
+	private boolean checkinStatus;
 	@Field
-	private String Destination;
+	private boolean paymentStatus;
 	@Field
-	private LocalDateTime DepartureDateAndTime;
-	@Field
-	private LocalDateTime ArrivalDateAndTime;
-	@Field
-	private String SeatNo;
-	@Field
-	private double TicketPrice;
-	@Field
-	private String BookedBy;
+	private Flight flight;
+
 	
-	
-	public Ticket(String ticketId, String flightNo, String fullName, String email, String phoneNo, String origin,
-			String destination, LocalDateTime departureDateAndTime, LocalDateTime arrivalDateAndTime, String seatNo,
-			double ticketPrice, String bookedBy) {
+	public Ticket() {
+		
+	}
+
+
+	public Ticket(String ticketId, String fullName, String email, String phoneNo, String seatNo, boolean checkinStatus,
+			boolean paymentStatus, Flight flight) {
 		super();
-		TicketId = ticketId;
-		FlightNo = flightNo;
-		FullName = fullName;
-		Email = email;
-		PhoneNo = phoneNo;
-		Origin = origin;
-		Destination = destination;
-		DepartureDateAndTime = departureDateAndTime;
-		ArrivalDateAndTime = arrivalDateAndTime;
-		SeatNo = seatNo;
-		TicketPrice = ticketPrice;
-		BookedBy = bookedBy;
+		this.ticketId = ticketId;
+		this.fullName = fullName;
+		this.email = email;
+		this.phoneNo = phoneNo;
+		this.seatNo = seatNo;
+		this.checkinStatus = checkinStatus;
+		this.paymentStatus = paymentStatus;
+		this.flight = flight;
 	}
+
+
 	public String getTicketId() {
-		return TicketId;
+		return ticketId;
 	}
+
+
 	public void setTicketId(String ticketId) {
-		TicketId = ticketId;
+		this.ticketId = ticketId;
 	}
+
+
 	public String getFullName() {
-		return FullName;
+		return fullName;
 	}
+
+
 	public void setFullName(String fullName) {
-		FullName = fullName;
+		this.fullName = fullName;
 	}
+
+
 	public String getEmail() {
-		return Email;
+		return email;
 	}
+
+
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
+
+
 	public String getPhoneNo() {
-		return PhoneNo;
+		return phoneNo;
 	}
+
+
 	public void setPhoneNo(String phoneNo) {
-		PhoneNo = phoneNo;
+		this.phoneNo = phoneNo;
 	}
-	public String getOrigin() {
-		return Origin;
-	}
-	public void setOrigin(String origin) {
-		Origin = origin;
-	}
-	public String getDestination() {
-		return Destination;
-	}
-	public void setDestination(String destination) {
-		Destination = destination;
-	}
-	public LocalDateTime getDepartureDateAndTime() {
-		return DepartureDateAndTime;
-	}
-	public void setDepartureDateAndTime(LocalDateTime departureDateAndTime) {
-		DepartureDateAndTime = departureDateAndTime;
-	}
-	public LocalDateTime getArrivalDateAndTime() {
-		return ArrivalDateAndTime;
-	}
-	public void setArrivalDateAndTime(LocalDateTime arrivalDateAndTime) {
-		ArrivalDateAndTime = arrivalDateAndTime;
-	}
+
+
 	public String getSeatNo() {
-		return SeatNo;
+		return seatNo;
 	}
+
+
 	public void setSeatNo(String seatNo) {
-		SeatNo = seatNo;
+		this.seatNo = seatNo;
 	}
-	public double getTicketPrice() {
-		return TicketPrice;
+
+
+	public boolean isCheckinStatus() {
+		return checkinStatus;
 	}
-	public void setTicketPrice(double ticketPrice) {
-		TicketPrice = ticketPrice;
+
+
+	public void setCheckinStatus(boolean checkinStatus) {
+		this.checkinStatus = checkinStatus;
 	}
-	public String getFlightNo() {
-		return FlightNo;
+
+
+	public boolean isPaymentStatus() {
+		return paymentStatus;
 	}
-	public void setFlightNo(String flightNo) {
-		FlightNo = flightNo;
+
+
+	public void setPaymentStatus(boolean paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
-	public String getBookedBy() {
-		return BookedBy;
+
+
+	public Flight getFlight() {
+		return flight;
 	}
-	public void setBookedBy(String bookedBy) {
-		BookedBy = bookedBy;
+
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
 	
 

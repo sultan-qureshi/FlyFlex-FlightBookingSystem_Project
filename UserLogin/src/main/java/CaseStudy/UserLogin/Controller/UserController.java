@@ -2,6 +2,7 @@ package CaseStudy.UserLogin.Controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,26 +18,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import CaseStudy.UserLogin.Model.Flight;
 import CaseStudy.UserLogin.Model.JwtRequest;
 import CaseStudy.UserLogin.Model.JwtResponse;
+import CaseStudy.UserLogin.Model.Ticket;
 import CaseStudy.UserLogin.Model.User;
+import CaseStudy.UserLogin.Repository.TicketRepository;
 import CaseStudy.UserLogin.Repository.UserRepository;
 import CaseStudy.UserLogin.Services.FlightServiceImp;
 import CaseStudy.UserLogin.Utility.JWTUtility;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	
-	
-//	@Autowired
-//	private TicketRepository ticketRepository;
-	
-//	public String currentUserName(Authentication authentication) {
-//		return authentication.getName();
-//	}
 	@Autowired
 	private JWTUtility jwtUtility;
 	
@@ -50,11 +49,17 @@ public class UserController {
 	
     @Autowired
     private FlightServiceImp flightServiceImp;
-	
+    
+    @Autowired
+    private TicketRepository ticketRepository;
+    
+   
+
+
 	@GetMapping("/")
-	public String home() {
-		return "Welocome USER";
-	}
+	public String currentUserName(Authentication authentication) {
+		return "Welcome "+authentication.getName();
+		}
 	
 	
 	@PostMapping("/authenticate")
@@ -99,36 +104,48 @@ public class UserController {
 						&& Flight.getDepartureDate().equals(departureDate)) 
 				.collect(Collectors.toList());
 	}
+
 	
-//	@GetMapping("find/{_id}")
-//	public Optional<Flight> getbyid(@PathVariable String _id){
-//		return flightRepository.findById(_id);
-//	}
-	
-	
-	
-//	@PostMapping("/bookflight/{_id}")
-//	public String booking(@PathVariable String _id,@RequestBody Ticket ticket)
-//	{
-//		
-//		Optional<Flight> flightData = flightRepository.findById(_id);
-//		if (flightData.isPresent()) {
-//			Flight flite = flightData.get();
-//			ticket.setFlightNo(flite.getFlightNo());
-//			ticket.setOrigin(flite.getOrigin());
-//			ticket.setDestination(flite.getDestination());
-//			ticket.setDepartureDateAndTime(flite.getDepartureDateAndTime());
-//			ticket.setArrivalDateAndTime(flite.getArrivalDateAndTime());
-//			ticket.setTicketPrice(flite.getTicketPrice());
-//		//	ticket.setBookedBy(currentUserName());
-//			ticketRepository.save(ticket);
-//		
-//			return "Booked Flight>> FlightNo:"+ticket.getFlightNo()+" Name "+ticket.getFullName();			
-//		}
-//		else {
-//			return "Flight NOT FOUND";
-//		}
-//		
-//	}
+	@PostMapping("/bookflight/{_id}")
+	public String booking(@PathVariable String _id,@RequestBody Ticket ticket)
+	{
+		List<Flight> allflights = flightServiceImp.getallflights();
+		List<Flight> flightbyid = 
+				allflights.stream().filter(
+						Flight -> Flight.get_id()
+						.equals(_id)).collect(Collectors.toList());
+		if(flightbyid.isEmpty()) {
+			return "not found";
+		}
+		else {
+			ticket.setFlight(flightbyid.get(0));
+			ticket.setPaymentStatus(false);
+			ticket.setCheckinStatus(false);
+			ticket.setSeatNo("Not CheckedIn Yet");
+		//	ticket.setFullName();
+			ticketRepository.save(ticket);
+			return "Booked Ticket "+ticket.getTicketId()+" for "+ticket.getFullName();
+		}
+	}
+	@GetMapping("/checkin/{ticketId}")
+	public String  Checkin(@PathVariable String ticketId,@RequestParam("seatno") String seatNo) {
+		Optional<Ticket> ticketData = ticketRepository.findById(ticketId);
+		if(ticketData.isPresent()) {
+			Ticket ticket = ticketData.get();
+			if (ticket.isCheckinStatus()== false) {
+				ticket.setSeatNo(seatNo);
+				ticket.setCheckinStatus(true);
+				ticketRepository.save(ticket);
+				return "CheckedIn Ticket :" + ticket.getTicketId() + " Seat NO: " + ticket.getSeatNo() + " For  "
+						+ ticket.getFullName() + " In Flight" + ticket.getFlight().getFlightNo();
+			}
+			else {
+				return "Already Checked In";
+				
+			}
+		}
+		return "Not found";
+
+	}
 
 }

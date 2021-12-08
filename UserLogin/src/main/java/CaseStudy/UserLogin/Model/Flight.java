@@ -85,7 +85,16 @@ public class Flight {
 	}
 	public void setTicketPrice(double ticketPrice) {
 		TicketPrice = ticketPrice;
+	}
+	@Override
+	public String toString() {
+		return "Flight [_id=" + _id + ", FlightNo=" + FlightNo + ", Airline=" + Airline + ", Origin=" + Origin
+				+ ", Destination=" + Destination + ", DepartureDate=" + DepartureDate + ", DepartureDateAndTime="
+				+ DepartureDateAndTime + ", ArrivalDateAndTime=" + ArrivalDateAndTime + ", TicketPrice=" + TicketPrice
+				+ "]";
 	}	
+	
+	
 }
 
 

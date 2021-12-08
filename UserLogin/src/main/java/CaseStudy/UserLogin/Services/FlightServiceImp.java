@@ -20,6 +20,6 @@ public class FlightServiceImp {
 		Flight[] flight = restTemplate.getForObject(url, Flight[].class);
 		return Arrays.asList(flight);
 	}
-	
+
 
 }
