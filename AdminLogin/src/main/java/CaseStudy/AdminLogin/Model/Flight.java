@@ -29,6 +29,26 @@ public class Flight {
 	private LocalDateTime ArrivalDateAndTime;
 	@Field
 	private double TicketPrice;
+	
+	
+	public Flight() {
+		
+	}
+	public Flight(String _id, String flightNo, String airline, String origin, String destination,
+			LocalDate departureDate, LocalDateTime departureDateAndTime, LocalDateTime arrivalDateAndTime,
+			double ticketPrice) {
+		super();
+		this._id = _id;
+		FlightNo = flightNo;
+		Airline = airline;
+		Origin = origin;
+		Destination = destination;
+		DepartureDate = departureDate;
+		DepartureDateAndTime = departureDateAndTime;
+		ArrivalDateAndTime = arrivalDateAndTime;
+		TicketPrice = ticketPrice;
+	}
+
 
 
 

@@ -76,7 +76,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/findFight/{_id}")
-	public List<Flight> findFlightbyid(@PathVariable String _id, @RequestBody Flight flight){
+	public List<Flight> findFlightbyid(@PathVariable String _id){
 		Optional<Flight> flightdata = flightRepository.findById(_id);
 		if(flightdata.isPresent()) {
 			Flight flightbyid = flightdata.get();
