@@ -61,6 +61,12 @@ class FlightServiceApplicationTests {
 		assertEquals(1, flightServiceController.getFlights(origin, dest, date).size());
 				
 	}
+	@Test
+	void welcomeTest() {
+				
+		assertEquals("Welocome to Flight Service", flightServiceController.home());
+		
+	}
 	
 
 }

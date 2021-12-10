@@ -63,5 +63,14 @@ class AdminLoginApplicationTests {
 		assertEquals(1, adminController.getFlights(origin, dest, date).size());
 				
 	}
-
+	
+	@Test
+	void addflightTest() {
+	Flight flight = new Flight("106","f13","Airindia","delhi","pune",
+				LocalDate.of(2021, 12, 21),
+				LocalDateTime.of(2021, 12, 21, 15, 00),
+				LocalDateTime.of(2021, 12, 21, 17, 00),
+				4800.0);
+		assertEquals("Added Flight :106 Number: f13", adminController.saveFlight(flight));
+	}
 }

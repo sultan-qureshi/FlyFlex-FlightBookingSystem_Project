@@ -127,5 +127,4 @@ public class AdminController {
 
 		return flightRepository.findByDetails(origin,destination,departureDate);
 	}
-
 }

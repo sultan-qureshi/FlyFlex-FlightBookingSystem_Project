@@ -1,9 +1,7 @@
 package CaseStudyFlightService.Controller;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,15 +28,6 @@ public class FlightServiceController {
 	@GetMapping("/findallflights")
 	public List<Flight> getAllFlights(){
 		return flightRepository.findAll();
-	}
-	@GetMapping("/findFight/{_id}")
-	public List<Flight> findFlightbyid(@PathVariable String _id){
-		Optional<Flight> flightdata = flightRepository.findById(_id);
-		if(flightdata.isPresent()) {
-			Flight flightbyid = flightdata.get();
-			return  Arrays.asList(flightbyid);
-		}
-		return null;	
 	}
 	
 	@GetMapping("/find/{origin}/{destination}/{departureDate}")

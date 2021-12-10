@@ -16,7 +16,7 @@ public class FlightServiceImp {
 	 private RestTemplate restTemplate;
 	
 	public List<Flight> getallflights(){
-		String url ="http://flight-service/findallflights";
+		String url ="http://flight-service/flights/findallflights";
 		Flight[] flight = restTemplate.getForObject(url, Flight[].class);
 		return Arrays.asList(flight);
 	}
