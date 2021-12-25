@@ -10,9 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,14 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import CaseStudy.UserLogin.Model.Flight;
 import CaseStudy.UserLogin.Model.JwtRequest;
-import CaseStudy.UserLogin.Model.JwtResponse;
 import CaseStudy.UserLogin.Model.Ticket;
 import CaseStudy.UserLogin.Model.User;
 import CaseStudy.UserLogin.Repository.TicketRepository;
 import CaseStudy.UserLogin.Repository.UserRepository;
 import CaseStudy.UserLogin.Services.FlightServiceImp;
 import CaseStudy.UserLogin.Utility.JWTUtility;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -57,13 +56,16 @@ public class UserController {
 
 
 	@GetMapping("/")
-	public String currentUserName(Authentication authentication) {
-		return "Welcome "+authentication.getName();
-		}
+	public String wlcom() {
+		return "Welcome Again";
+	}
+//	public String currentUserName(Authentication authentication) {
+//		return "Welcome "+authentication.getName();
+//		}
 	
 	
 	@PostMapping("/authenticate")
-	public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest ) throws Exception {
+	public String authenticate(@RequestBody JwtRequest jwtRequest ) throws Exception {
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
@@ -77,13 +79,14 @@ public class UserController {
 		
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtRequest.getUsername());
 		final String token = jwtUtility.generateToken(userDetails);
-		return new JwtResponse(token);
+		return token;
+				//new JwtResponse(token);
 	}
 	
 	@PostMapping("/signup")
 	public String addUser(@RequestBody User user) {
 		userRepository.save(user);
-		return "Added User :"+user.getUsername();
+		return "Successfully Registered :"+user.getUsername();
 	}
 	
 	
