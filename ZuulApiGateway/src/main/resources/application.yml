@@ -19,5 +19,5 @@ zuul:
   routes:
       flight-service:
         path: /flight-service/flights/**
-        service-id: flight-servic
+        service-id: flight-service
         strip-prefix: true

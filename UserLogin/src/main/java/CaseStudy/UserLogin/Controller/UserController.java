@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -55,13 +56,14 @@ public class UserController {
    
 
 
-	@GetMapping("/")
-	public String wlcom() {
-		return "Welcome Again";
-	}
-//	public String currentUserName(Authentication authentication) {
-//		return "Welcome "+authentication.getName();
-//		}
+	
+//	public String wlcom() {
+//		return "Welcome Again";
+//	}
+    @GetMapping("/")
+	public String currentUserName(Authentication authentication) {
+		return authentication.getName();
+		}
 	
 	
 	@PostMapping("/authenticate")

@@ -39,8 +39,8 @@ public class FlightServiceController {
 		return flightRepository.findByDetails(origin,destination,departureDate);
 	}
 	
-	@GetMapping("/findallflightbyid")
-	public Optional<Flight> getflightbyid(String _id){
+	@GetMapping("/findallflightbyid/{_id}")
+	public Optional<Flight> getflightbyid(@PathVariable String _id){
 		Optional<Flight> flightbyid = flightRepository.findById(_id);
 		return flightbyid;
 		
