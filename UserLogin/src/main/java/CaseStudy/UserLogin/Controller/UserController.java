@@ -152,5 +152,9 @@ public class UserController {
 		return "Not found";
 
 	}
+	@GetMapping("/allTickets/{bookedBy}")
+	public List<Ticket> getallTickets(@PathVariable String bookedBy){
+		return ticketRepository.findByUser(bookedBy);	
+	}
 
 }

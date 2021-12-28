@@ -21,16 +21,19 @@ public class Ticket {
 	@Field
 	private boolean paymentStatus;
 	@Field
+	private String bookedBy;
+	@Field
 	private Flight flight;
 
-	
+
 	public Ticket() {
 		
 	}
+	
 
 
 	public Ticket(String ticketId, String fullName, String email, String phoneNo, String seatNo, boolean checkinStatus,
-			boolean paymentStatus, Flight flight) {
+			boolean paymentStatus, String bookedBy, Flight flight) {
 		super();
 		this.ticketId = ticketId;
 		this.fullName = fullName;
@@ -39,8 +42,10 @@ public class Ticket {
 		this.seatNo = seatNo;
 		this.checkinStatus = checkinStatus;
 		this.paymentStatus = paymentStatus;
+		this.bookedBy = bookedBy;
 		this.flight = flight;
 	}
+
 
 
 	public String getTicketId() {
@@ -48,9 +53,11 @@ public class Ticket {
 	}
 
 
+
 	public void setTicketId(String ticketId) {
 		this.ticketId = ticketId;
 	}
+
 
 
 	public String getFullName() {
@@ -58,9 +65,11 @@ public class Ticket {
 	}
 
 
+
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+
 
 
 	public String getEmail() {
@@ -68,9 +77,11 @@ public class Ticket {
 	}
 
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 
 	public String getPhoneNo() {
@@ -78,9 +89,11 @@ public class Ticket {
 	}
 
 
+
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+
 
 
 	public String getSeatNo() {
@@ -88,9 +101,11 @@ public class Ticket {
 	}
 
 
+
 	public void setSeatNo(String seatNo) {
 		this.seatNo = seatNo;
 	}
+
 
 
 	public boolean isCheckinStatus() {
@@ -98,9 +113,11 @@ public class Ticket {
 	}
 
 
+
 	public void setCheckinStatus(boolean checkinStatus) {
 		this.checkinStatus = checkinStatus;
 	}
+
 
 
 	public boolean isPaymentStatus() {
@@ -108,9 +125,23 @@ public class Ticket {
 	}
 
 
+
 	public void setPaymentStatus(boolean paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
+
+
+
+	public String getBookedBy() {
+		return bookedBy;
+	}
+
+
+
+	public void setBookedBy(String bookedBy) {
+		this.bookedBy = bookedBy;
+	}
+
 
 
 	public Flight getFlight() {
@@ -118,9 +149,9 @@ public class Ticket {
 	}
 
 
+
 	public void setFlight(Flight flight) {
 		this.flight = flight;
-	}
-	
+	}	
 
 }
