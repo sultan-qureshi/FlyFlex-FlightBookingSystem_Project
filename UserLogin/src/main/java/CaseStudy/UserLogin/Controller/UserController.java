@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import CaseStudy.UserLogin.Model.Flight;
@@ -85,12 +84,21 @@ public class UserController {
 				//new JwtResponse(token);
 	}
 	
-	@PostMapping("/signup")
-	public String addUser(@RequestBody User user) {
+//	@PostMapping("/signup")
+//	public String addUser(@RequestBody User user) {
+//		userRepository.save(user);
+//		return "Successfully Registered :"+user.getUsername();
+//	}
+
+	@PostMapping("/signup/{username}")
+ 	public String adUser(@PathVariable String username,@RequestBody User user) {
+ 		Optional<User> users = userRepository.findById(username);
+ 		if(users.isEmpty()) {
+ 		
 		userRepository.save(user);
-		return "Successfully Registered :"+user.getUsername();
-	}
-	
+		return "Successfully Registered :"+user.getUsername();}
+ 		else {return "Already Registered"; }
+	}	
 	
 	
 	@GetMapping("/allflights")
@@ -132,8 +140,8 @@ public class UserController {
 			return "Booked Ticket "+ticket.getTicketId()+" for "+ticket.getFullName();
 		}
 	}
-	@GetMapping("/checkin/{ticketId}")
-	public String  Checkin(@PathVariable String ticketId,@RequestParam("seatno") String seatNo) {
+	@GetMapping("/checkin/{ticketId}/{seatNo}")
+	public String  Checkin(@PathVariable String ticketId,@PathVariable String seatNo) {
 		Optional<Ticket> ticketData = ticketRepository.findById(ticketId);
 		if(ticketData.isPresent()) {
 			Ticket ticket = ticketData.get();

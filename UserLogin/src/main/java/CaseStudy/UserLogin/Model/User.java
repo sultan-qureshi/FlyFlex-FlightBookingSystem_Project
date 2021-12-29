@@ -7,8 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection= "Users")
 public class User {
 	 @Id
-	 private String _id;
-	 @Field
 	 private String username;
 	 @Field
 	 private String password;
@@ -29,12 +27,7 @@ public class User {
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
-	public String get_id() {
-		return _id;
-	}
-	public void set_id(String _id) {
-		this._id = _id;
-	}
+
 	public String getUsername() {
 		return username;
 	}
