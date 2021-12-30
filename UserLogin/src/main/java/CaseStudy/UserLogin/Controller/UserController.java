@@ -29,8 +29,9 @@ import CaseStudy.UserLogin.Repository.TicketRepository;
 import CaseStudy.UserLogin.Repository.UserRepository;
 import CaseStudy.UserLogin.Services.FlightServiceImp;
 import CaseStudy.UserLogin.Utility.JWTUtility;
-@CrossOrigin(origins = "*")
+
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
 	
@@ -146,12 +147,19 @@ public class UserController {
 		if(ticketData.isPresent()) {
 			Ticket ticket = ticketData.get();
 			if (ticket.isCheckinStatus()== false) {
+				List<Ticket> ticketseat = ticketRepository.findByseat(seatNo);
+				if(ticketseat.isEmpty()) {
 				ticket.setSeatNo(seatNo);
 				ticket.setCheckinStatus(true);
 				ticketRepository.save(ticket);
 				return "CheckedIn Ticket :" + ticket.getTicketId() + " Seat NO: " + ticket.getSeatNo() + " For  "
 						+ ticket.getFullName() + " In Flight" + ticket.getFlight().getFlightNo();
+				}
+				else {
+					return "Seat Already Occupied";
+				}
 			}
+				
 			else {
 				return "Already Checked In";
 				

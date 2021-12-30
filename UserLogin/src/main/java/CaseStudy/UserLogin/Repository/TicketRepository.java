@@ -11,4 +11,7 @@ import CaseStudy.UserLogin.Model.Ticket;
 public interface TicketRepository extends MongoRepository<Ticket, String> {
 	@Query("{ 'bookedBy': ?0 }")
 	List<Ticket> findByUser(String bookedBy);
+	
+	@Query("{ 'seatNo': ?0}")
+	List<Ticket> findByseat(String seatNo);
 }

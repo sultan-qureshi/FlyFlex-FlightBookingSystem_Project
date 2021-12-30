@@ -1,17 +1,15 @@
 package CaseStudy.AdminLogin.Controller;
 
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,10 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import CaseStudy.AdminLogin.Model.Flight;
 import CaseStudy.AdminLogin.Model.JwtRequest;
-import CaseStudy.AdminLogin.Model.JwtResponse;
 import CaseStudy.AdminLogin.Repository.FlightRepository;
 import CaseStudy.AdminLogin.Utility.JWTUtility;
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -48,7 +46,7 @@ public class AdminController {
 		return "Welocome Admin";
 	}
 	@PostMapping("/authenticate")
-	public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest ) throws Exception {
+	public String authenticate(@RequestBody JwtRequest jwtRequest ) throws Exception {
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
@@ -62,8 +60,10 @@ public class AdminController {
 		
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtRequest.getUsername());
 		final String token = jwtUtility.generateToken(userDetails);
-		return new JwtResponse(token);
+		return token;
 	}
+	
+	
 	@GetMapping("/findallflights")
 	public List<Flight> getAllFlights(){
 		return flightRepository.findAll();
@@ -75,16 +75,12 @@ public class AdminController {
 		return "Added Flight :"+flight.get_id()+" Number: "+flight.getFlightNo();
 	}
 	
-	@GetMapping("/findFight/{_id}")
-	public List<Flight> findFlightbyid(@PathVariable String _id){
-		Optional<Flight> flightdata = flightRepository.findById(_id);
-		if(flightdata.isPresent()) {
-			Flight flightbyid = flightdata.get();
-			return  Arrays.asList(flightbyid);
-		}
-		return null;	
+	@GetMapping("/findflightbyid/{_id}")
+	public Optional<Flight> getflightbyid(@PathVariable String _id){
+		Optional<Flight> flightbyid = flightRepository.findById(_id);
+		return flightbyid;
+		
 	}
-	
 	@DeleteMapping("/deleteFlight/{_id}")
 	public String deletebyid(@PathVariable String _id) {
 		Optional<Flight> flightdata = flightRepository.findById(_id);
@@ -97,7 +93,7 @@ public class AdminController {
 	}
 	
 	@PutMapping("/editFlight/{_id}")
-	public List<Flight> editFlight(@PathVariable String _id, @RequestBody Flight flight){
+	public String editFlight(@PathVariable String _id, @RequestBody Flight flight){
 		Optional<Flight> flightdata = flightRepository.findById(_id);
 		if(flightdata.isPresent()) {
 			Flight flightbyid = flightdata.get();
@@ -115,16 +111,9 @@ public class AdminController {
 			}
 			flightRepository.save(flightbyid);
 			
-			return  Arrays.asList(flightbyid);
+			return  "Flight Updated";
 							
 		}
 		return null;		
-	}
-	
-	@GetMapping("/find/{origin}/{destination}/{departureDate}")
-	public List<Flight> getFlights(@PathVariable String origin,@PathVariable String destination,@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate departureDate)
-	{
-
-		return flightRepository.findByDetails(origin,destination,departureDate);
 	}
 }

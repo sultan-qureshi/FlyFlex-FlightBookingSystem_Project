@@ -28,9 +28,8 @@ class AdminLoginApplicationTests {
 	@MockBean
 	private FlightRepository flightRepository;
 	
-
 	
-	@Test
+	
 	void flighfindTest() {		
 		when(flightRepository.findAll()).thenReturn(Stream.of(
 				new Flight("102","f12","Airindia","delhi","mumbai",
@@ -47,22 +46,6 @@ class AdminLoginApplicationTests {
 		assertEquals(2, adminController.getAllFlights().size());
 		
 	}
-	@Test
-	void flighSearchTest() {
-		String origin = "delhi";
-		String dest = "pune";
-		LocalDate date = LocalDate.of(2021, 12, 21);
-		when(adminController.getFlights(origin,dest,date)
-				).thenReturn(Stream.of(
-						new Flight("103","f13","Airindia","delhi","pune",
-						LocalDate.of(2021, 12, 21),
-						LocalDateTime.of(2021, 12, 21, 15, 00),
-						LocalDateTime.of(2021, 12, 21, 17, 00),
-						4800.0))
-						.collect(Collectors.toList()));
-		assertEquals(1, adminController.getFlights(origin, dest, date).size());
-				
-	}
 	
 	@Test
 	void addflightTest() {
@@ -73,4 +56,5 @@ class AdminLoginApplicationTests {
 				4800.0);
 		assertEquals("Added Flight :106 Number: f13", adminController.saveFlight(flight));
 	}
+
 }
