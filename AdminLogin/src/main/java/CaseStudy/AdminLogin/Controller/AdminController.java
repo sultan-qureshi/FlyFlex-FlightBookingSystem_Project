@@ -1,5 +1,6 @@
 package CaseStudy.AdminLogin.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,8 +72,13 @@ public class AdminController {
 	
 	@PostMapping("/addFlight")
 	public String saveFlight(@RequestBody Flight flight) {
+		LocalDateTime current = LocalDateTime.now();
+		if(flight.getDepartureDateAndTime().isAfter(current) && flight.getArrivalDateAndTime().isAfter(
+				flight.getDepartureDateAndTime())) {
+		flight.setDepartureDate(flight.getDepartureDateAndTime().toLocalDate());
 		flightRepository.save(flight);
-		return "Added Flight :"+flight.get_id()+" Number: "+flight.getFlightNo();
+		return "Added Flight : "+flight.getFlightNo()+" From "+flight.getOrigin()+" To "+flight.getDestination();}
+		else { return "Invalid  Date Inputs, Flight Not Added"; }
 	}
 	
 	@GetMapping("/findflightbyid/{_id}")
@@ -97,21 +103,29 @@ public class AdminController {
 		Optional<Flight> flightdata = flightRepository.findById(_id);
 		if(flightdata.isPresent()) {
 			Flight flightbyid = flightdata.get();
-			if (flight.getTicketPrice() != 0.0) {
-				flightbyid.setTicketPrice(flight.getTicketPrice());
-			}
-			if (flight.getDepartureDate() != null) {
-				flightbyid.setDepartureDate(flight.getDepartureDate());
-			}
-			if (flight.getDepartureDateAndTime() != null) {
-				flightbyid.setDepartureDateAndTime(flight.getDepartureDateAndTime());
-			}
-			if (flight.getArrivalDateAndTime() != null) {
-				flightbyid.setArrivalDateAndTime(flight.getArrivalDateAndTime());
-			}
-			flightRepository.save(flightbyid);
+			LocalDateTime current = LocalDateTime.now();
+			if(flight.getDepartureDateAndTime().isAfter(current) && flight.getArrivalDateAndTime().isAfter(
+					flight.getDepartureDateAndTime())) {
+				
+				if (flight.getTicketPrice() != 0.0) {
+					flightbyid.setTicketPrice(flight.getTicketPrice());
+				}
+				if (flight.getDepartureDateAndTime() != null) {
+					flightbyid.setDepartureDateAndTime(flight.getDepartureDateAndTime());
+					flightbyid.setDepartureDate(flight.getDepartureDateAndTime().toLocalDate());
+				}
+				if (flight.getArrivalDateAndTime() != null) {
+					flightbyid.setArrivalDateAndTime(flight.getArrivalDateAndTime());
+				}
+				
+				
+				flightRepository.save(flightbyid);
 			
-			return  "Flight Updated";
+				return  "Flight Updated Succeffully ";
+			
+			}
+			return "Invalid Date Inputs";
+			
 							
 		}
 		return null;		

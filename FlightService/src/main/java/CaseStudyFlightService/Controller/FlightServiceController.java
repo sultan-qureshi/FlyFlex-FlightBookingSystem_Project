@@ -1,8 +1,10 @@
 package CaseStudyFlightService.Controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,14 +31,21 @@ public class FlightServiceController {
 	}
 	@GetMapping("/findallflights")
 	public List<Flight> getAllFlights(){
-		return flightRepository.findAll();
+		LocalDateTime date = LocalDateTime.now();
+		List<Flight> allflights = flightRepository.findAll();
+		return allflights.stream().filter(Flight -> Flight.getDepartureDateAndTime().isAfter(date))
+		.collect(Collectors.toList());
 	}
 	
 	@GetMapping("/find/{origin}/{destination}/{departureDate}")
 	public List<Flight> getFlights(@PathVariable String origin,@PathVariable String destination,@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate departureDate)
 	{
+		LocalDateTime date = LocalDateTime.now();
 
-		return flightRepository.findByDetails(origin,destination,departureDate);
+		List<Flight> allflights = flightRepository.findByDetails(origin,destination,departureDate);
+		return allflights.stream().filter(Flight -> Flight.getDepartureDateAndTime().isAfter(date))
+		.collect(Collectors.toList());
+		
 	}
 	
 	@GetMapping("/findallflightbyid/{_id}")

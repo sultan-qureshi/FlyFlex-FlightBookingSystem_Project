@@ -1,6 +1,7 @@
 package CaseStudy.UserLogin.Controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -95,11 +97,22 @@ public class UserController {
  	public String adUser(@PathVariable String username,@RequestBody User user) {
  		Optional<User> users = userRepository.findById(username);
  		if(users.isEmpty()) {
- 		
-		userRepository.save(user);
-		return "Successfully Registered :"+user.getUsername();}
- 		else {return "Already Registered"; }
-	}	
+ 			String email = user.getEmail();
+ 			List<User> userbyemail = userRepository.findByDetails(email);
+ 			if(userbyemail.isEmpty()) {
+ 			
+ 			userRepository.save(user);
+ 			
+ 			return "Successfully Registered :"+user.getUsername();
+ 			}
+ 			else {
+ 				return "Email Id Already Registered";
+ 			}
+ 		}
+ 		else {
+ 			return "UserName Not Available"; 
+ 			}
+ 		}	
 	
 	
 	@GetMapping("/allflights")
@@ -146,9 +159,12 @@ public class UserController {
 		Optional<Ticket> ticketData = ticketRepository.findById(ticketId);
 		if(ticketData.isPresent()) {
 			Ticket ticket = ticketData.get();
+			String flightid = ticket.getFlight().get_id();
 			if (ticket.isCheckinStatus()== false) {
 				List<Ticket> ticketseat = ticketRepository.findByseat(seatNo);
-				if(ticketseat.isEmpty()) {
+				List<Ticket> fticket = ticketseat.stream().filter(Ticket -> Ticket.getFlight().get_id().equals(flightid))
+						.collect(Collectors.toList());
+				if(fticket.isEmpty()) {
 				ticket.setSeatNo(seatNo);
 				ticket.setCheckinStatus(true);
 				ticketRepository.save(ticket);
@@ -167,10 +183,30 @@ public class UserController {
 		}
 		return "Not found";
 
-	}
+		}
 	@GetMapping("/allTickets/{bookedBy}")
 	public List<Ticket> getallTickets(@PathVariable String bookedBy){
-		return ticketRepository.findByUser(bookedBy);	
+		LocalDateTime date = LocalDateTime.now();
+		List<Ticket> ticbyuser = ticketRepository.findByUser(bookedBy);
+		return  ticbyuser.stream().filter(Ticket -> Ticket.getFlight().getDepartureDateAndTime().isAfter(date))
+		.collect(Collectors.toList());
+		//return ticketRepository.findByUser(bookedBy);	
 	}
+	
+	@GetMapping("/allPastTickets/{bookedBy}")
+	public List<Ticket> getallpastTickets(@PathVariable String bookedBy){
+		LocalDateTime date = LocalDateTime.now();
+		List<Ticket> ticbyuser = ticketRepository.findByUser(bookedBy);
+		return  ticbyuser.stream().filter(Ticket -> Ticket.getFlight().getDepartureDateAndTime().isBefore(date))
+		.collect(Collectors.toList());	
+	}
+	
+	@DeleteMapping("/cancelTicket/{ticketId}")
+	public String cancel(@PathVariable String ticketId) {
+		ticketRepository.deleteById(ticketId);
+		return "Cancelled ticket with Id"+ticketId;
+		
+	}
+	
 
 }
