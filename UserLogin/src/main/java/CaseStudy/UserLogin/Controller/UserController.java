@@ -1,13 +1,11 @@
 package CaseStudy.UserLogin.Controller;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -103,7 +101,7 @@ public class UserController {
  			
  			userRepository.save(user);
  			
- 			return "Successfully Registered :"+user.getUsername();
+ 			return "Successfully Registered :"+user.getUsername()+" Now You Can Login";
  			}
  			else {
  				return "Email Id Already Registered";
@@ -115,23 +113,6 @@ public class UserController {
  		}	
 	
 	
-	@GetMapping("/allflights")
-	public List<Flight> getall(){
-		List<Flight> flight = flightServiceImp.getallflights();
-		return flight;
-	
-	}
-	
-	@GetMapping("/find/{origin}/{destination}/{departureDate}")
-	public List<Flight> getflight(@PathVariable String origin,@PathVariable String destination,@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate departureDate){
-		List<Flight> list = flightServiceImp.getallflights();
-		return list.stream()
-				.filter(Flight -> Flight.getOrigin().equals(origin)
-						&& Flight.getDestination().equals(destination)
-						&& Flight.getDepartureDate().equals(departureDate)) 
-				.collect(Collectors.toList());
-	}
-
 	
 	@PostMapping("/bookflight/{_id}")
 	public String booking(@PathVariable String _id,@RequestBody Ticket ticket)
@@ -151,7 +132,8 @@ public class UserController {
 			ticket.setSeatNo("Not CheckedIn Yet");
 		//	ticket.setFullName();
 			ticketRepository.save(ticket);
-			return "Booked Ticket "+ticket.getTicketId()+" for "+ticket.getFullName();
+			return "Booked Ticket for "+ticket.getFullName() +" In "+ticket.getFlight().getFlightNo()+" "+ticket.getFlight().getOrigin()+
+					" -> "+ticket.getFlight().getDestination();
 		}
 	}
 	@GetMapping("/checkin/{ticketId}/{seatNo}")
@@ -168,8 +150,8 @@ public class UserController {
 				ticket.setSeatNo(seatNo);
 				ticket.setCheckinStatus(true);
 				ticketRepository.save(ticket);
-				return "CheckedIn Ticket :" + ticket.getTicketId() + " Seat NO: " + ticket.getSeatNo() + " For  "
-						+ ticket.getFullName() + " In Flight" + ticket.getFlight().getFlightNo();
+				return " Successfully CheckedIn for " + ticket.getFullName() +
+						" In " + ticket.getFlight().getFlightNo() +" with Seat No: " + ticket.getSeatNo();
 				}
 				else {
 					return "Seat Already Occupied";
@@ -203,8 +185,11 @@ public class UserController {
 	
 	@DeleteMapping("/cancelTicket/{ticketId}")
 	public String cancel(@PathVariable String ticketId) {
+		Optional<Ticket> ticketdata = ticketRepository.findById(ticketId);
+		if(ticketdata.isPresent()) {
 		ticketRepository.deleteById(ticketId);
-		return "Cancelled ticket with Id"+ticketId;
+		return "Cancelled ticket with Id "+ticketId; }
+		return "Ticket Not Found!";
 		
 	}
 	

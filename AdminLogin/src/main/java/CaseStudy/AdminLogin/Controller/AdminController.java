@@ -74,11 +74,11 @@ public class AdminController {
 	public String saveFlight(@RequestBody Flight flight) {
 		LocalDateTime current = LocalDateTime.now();
 		if(flight.getDepartureDateAndTime().isAfter(current) && flight.getArrivalDateAndTime().isAfter(
-				flight.getDepartureDateAndTime())) {
+				flight.getDepartureDateAndTime()) && flight.getOrigin().equalsIgnoreCase(flight.getDestination())==false ) {
 		flight.setDepartureDate(flight.getDepartureDateAndTime().toLocalDate());
 		flightRepository.save(flight);
 		return "Added Flight : "+flight.getFlightNo()+" From "+flight.getOrigin()+" To "+flight.getDestination();}
-		else { return "Invalid  Date Inputs, Flight Not Added"; }
+		else { return "Invalid  Data Inputs, Flight Not Added"; }
 	}
 	
 	@GetMapping("/findflightbyid/{_id}")
@@ -104,30 +104,28 @@ public class AdminController {
 		if(flightdata.isPresent()) {
 			Flight flightbyid = flightdata.get();
 			LocalDateTime current = LocalDateTime.now();
-			if(flight.getDepartureDateAndTime().isAfter(current) && flight.getArrivalDateAndTime().isAfter(
-					flight.getDepartureDateAndTime())) {
+			
 				
 				if (flight.getTicketPrice() != 0.0) {
 					flightbyid.setTicketPrice(flight.getTicketPrice());
 				}
 				if (flight.getDepartureDateAndTime() != null) {
+					if(flight.getDepartureDateAndTime().isAfter(current)){
 					flightbyid.setDepartureDateAndTime(flight.getDepartureDateAndTime());
-					flightbyid.setDepartureDate(flight.getDepartureDateAndTime().toLocalDate());
+					flightbyid.setDepartureDate(flight.getDepartureDateAndTime().toLocalDate()); }
+					else { return "Departure Date can not be before Current date"; }
 				}
 				if (flight.getArrivalDateAndTime() != null) {
-					flightbyid.setArrivalDateAndTime(flight.getArrivalDateAndTime());
+					if(flight.getArrivalDateAndTime().isAfter(
+					flight.getDepartureDateAndTime())) {
+					flightbyid.setArrivalDateAndTime(flight.getArrivalDateAndTime());}
+					else { return "Arrival Date can not be before Departure"; }
 				}
 				
 				
 				flightRepository.save(flightbyid);
 			
-				return  "Flight Updated Succeffully ";
-			
-			}
-			return "Invalid Date Inputs";
-			
-							
-		}
+				return  "Flight Updated Succeffully ";}
 		return null;		
 	}
 }
