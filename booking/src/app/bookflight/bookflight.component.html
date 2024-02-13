@@ -1,0 +1,18 @@
+<app-header></app-header>
+<h3 > Booking Flight</h3>
+<h3 id="det"> Enter Details</h3>
+<div >
+  <h4 id="org">{{f1data.origin}}</h4>
+  <h4 id="des">{{f1data.destination}}</h4>
+  <h4 id="dat">{{f1data.departureDate}}</h4>
+  <h4 id="prc">₹{{f1data.ticketPrice}}</h4>
+
+    <form    #ticketForm="ngForm" (ngSubmit)="postdetails(ticketForm.value)" >
+      Title&nbsp;&nbsp;&nbsp;<select  type="text" required  ngModel name="phoneNo">
+        <option Value="Mr.">Mr.</option><option Value="Ms.">Ms.</option><option value="Mrs.">Mrs.</option>
+        </select><br><br>
+      <input  type="text" required minlength="5" ngModel name="fullName" placeholder="Enter Your Full Name" ><br><br>
+      <input type="email" required email ngModel name="email" placeholder="Enter Your  Email"><br><br>
+      <button [disabled]="!ticketForm.form.valid" class="btn btn-primary">Confirm Booking</button><br><br>
+    </form>
+  </div>

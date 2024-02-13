@@ -1,0 +1,20 @@
+table {
+  border-collapse: collapse;
+  width: 75%;
+}
+
+th,td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+#tab th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #000000;
+  color: white;
+  border-radius: 20pt;
+}
+#tab tr:hover {background-color: rgb(194, 194, 194);}
+  

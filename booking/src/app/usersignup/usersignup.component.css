@@ -1,0 +1,11 @@
+input.ng-valid{
+    border-left: 7px solid green;
+}
+
+input.ng-invalid{
+    border-left: 7px solid red;
+}
+.error{
+    text-align: left;
+    color: red;
+}

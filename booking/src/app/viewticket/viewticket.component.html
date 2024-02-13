@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div align="center">
+    <h3>My Flights</h3>
+</div>
+<table id="tab" align="center">
+    <tr>
+        <th>Flight</th>
+        <th>Passenger Name</th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Seat No</th>
+        <th>Fare</th>
+    </tr>
+    <tr style="color: rgb(255, 255, 255); background-color: rgb(0, 204, 255);">Upcomming</tr>
+    <tr *ngFor="let ticket of t1data" >
+        <td>{{ticket.flight.airline}}</td>
+        <td>{{ticket.phoneNo}}{{ticket.fullName}}</td>
+        <td>{{ticket.flight.origin}}</td>
+        <td>{{ticket.flight.destination}}</td>
+        <td>{{ticket.flight.departureDateAndTime}}</td>
+        <td>{{ticket.flight.arrivalDateAndTime}}</td>
+        <td>{{ticket.seatNo}}</td>
+        <td>₹{{ticket.flight.ticketPrice}}</td>
+        <td><button id="btn" (click)="gotocheckin([ticket.ticketId],[ticket.checkinStatus])">Checkin</button></td>
+        <td><button id="cbtn" (click)="cancelTicket([ticket.ticketId])">Cancel</button></td>
+    </tr>
+    <br>
+    <tr style="color: rgb(255, 255, 255); background-color: rgb(153, 0, 158);">Past</tr>
+    <tr *ngFor="let ticket of pt1data" >
+        <td>{{ticket.flight.airline}}</td>
+        <td>{{ticket.phoneNo}}{{ticket.fullName}}</td>
+        <td>{{ticket.flight.origin}}</td>
+        <td>{{ticket.flight.destination}}</td>
+        <td>{{ticket.flight.departureDateAndTime}}</td>
+        <td>{{ticket.flight.arrivalDateAndTime}}</td>
+        <td>{{ticket.seatNo}}</td>
+        <td>₹{{ticket.flight.ticketPrice}}</td>
+        <td>Completed</td>
+    </tr>
+</table>

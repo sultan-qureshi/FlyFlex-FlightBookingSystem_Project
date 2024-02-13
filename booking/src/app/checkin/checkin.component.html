@@ -1,0 +1,14 @@
+<app-header></app-header>
+<form    #checkinForm="ngForm" (ngSubmit)="checkin(checkinForm.value)">
+    <h3>Checkin</h3>
+    <br><br><br>
+    Select Seat
+    <select  type="text" ngModel name="seatNo"  placeholder="Select Seat" >
+    <option value="1A">1A</option><option value="1B">1B</option><option value="1C">1C</option>
+    <option value="2A">2A</option><option value="2B">2B</option><option value="2C">2C</option>
+    <option value="3A">3A</option><option value="3B">3B</option><option value="3C">3C</option>
+    <option value="4A">4A</option><option value="4B">4B</option><option value="4C">4C</option>
+    <option value="5A">5A</option><option value="5B">5B</option><option value="5C">5C</option>
+    </select><br><br><br>
+    <button  class="btn btn-primary">Confirm Checkin</button><br><br>
+  </form>

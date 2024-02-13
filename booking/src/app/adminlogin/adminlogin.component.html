@@ -1,0 +1,17 @@
+<app-adminheader></app-adminheader>
+<div style="height: 600px;">
+
+    <div align="center">
+      <br><br><br>
+    <div  style="width: 17%; border-style: solid; height: 200pt; border-radius: 30pt;"  >
+      <h3>AdminLogin</h3>
+        <form    #regisForm="ngForm" (ngSubmit)="postdetails(regisForm.value)">
+          <br><br><input  type="text" required ngModel name="username"  placeholder="Enter UserName" ><br><br><br>
+        <input type="password" required ngModel name="password" placeholder="Enter Password"><br><br><br><br>
+          <button [disabled]="!regisForm.form.valid"
+          style="color: rgb(255, 255, 255); background-color: rgb(27, 26, 27);" class="btn btn-primary">Login</button><br><br>
+        </form>
+      </div>
+    </div>
+</div>
+    

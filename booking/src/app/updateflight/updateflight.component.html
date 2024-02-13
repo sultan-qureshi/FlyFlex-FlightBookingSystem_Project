@@ -1,0 +1,15 @@
+<app-adminheader></app-adminheader>
+<h3>Update Flight Details</h3>
+<form  #ticketForm="ngForm" (ngSubmit)="postdetails(ticketForm.value)" >
+    <br><br>
+    <input  placeholder={{f1data.flightNo}} disabled>&nbsp;
+    <input placeholder={{f1data.airline}} disabled><br><br>
+    <input placeholder={{f1data.origin}} disabled>&nbsp;
+    <input  placeholder={{f1data.destination}} disabled><br><br> 
+    <input type="datetime-local" ngModel name="departureDateAndTime" placeholder="Departure Time">&nbsp;
+    <input type="datetime-local" ngModel name="arrivalDateAndTime" placeholder="Arrival Time">&nbsp;
+    <input type="text" ngModel name="ticketPrice" placeholder="Ticket Price"><br><br>
+    <button class="btn btn-primary">Update Flight</button><br><br>
+  </form>
+  <h6 id="dep">Departure Date & Time</h6>
+  <h6 id="arv">Arrival Date & Time</h6>

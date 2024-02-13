@@ -1,0 +1,20 @@
+<app-adminheader></app-adminheader>
+<h3>Add New Flight Details</h3>
+<form  #ticketForm="ngForm" (ngSubmit)="postdetails(ticketForm.value)" >
+    <br><br>
+    <input type="text" required ngModel name="flightNo" placeholder="Flight No">&nbsp;
+    <input type="text" required ngModel name="airline" placeholder="Airline"><br><br>
+    <input list="cities" type="text" required ngModel name="origin" placeholder="Origin">&nbsp;
+    <datalist id="cities">
+      <option value="Bangalore"><option value="Kolkata"><option value="Chennai"><option value="Pune">
+      <option value="Jammu"><option value="Srinagar"><option value="Delhi"><option value="Mumbai"></option>
+      <option value="Hydrabad"><option value="Goa"><option value="Kochi"><option value="Leh"></option>
+    </datalist>
+    <input list="cities"  type="text" required ngModel name="destination" placeholder="Destination"><br><br> 
+    <input type="datetime-local" required ngModel name="departureDateAndTime" placeholder="Departure Time">&nbsp;
+    <input type="datetime-local" required ngModel name="arrivalDateAndTime" placeholder="Arrival Time">&nbsp;
+    <input type="text" required ngModel name="ticketPrice" placeholder="Ticket Price"><br><br>
+    <button class="btn btn-primary" [disabled]="!ticketForm.form.valid" >Add Flight</button><br><br>
+  </form>
+  <h6 id="dep">Departure Date & Time</h6>
+  <h6 id="arv">Arrival Date & Time</h6>

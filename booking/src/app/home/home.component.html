@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div style="border-style: double; border-bottom-style: hidden;">
+    <div style="background-image: url(https://www.gstatic.com/travel-frontend/animation/hero/flights_3.svg);
+    padding: 10%;">
+
+</div>
+    <div style="margin-top: -7%;">
+    <h1 align="center" style="color: indigo;">Flight Booking Site</h1>
+    </div>
+    
+ 
+   
+    <div>
+    <form  align="center" #simpleForm="ngForm" (ngSubmit)="getdetails(simpleForm.value)">
+      <input list="cities" type="text" ngModel name="origin" placeholder="Where from?" >&nbsp;
+      <datalist id="cities">
+        <option value="Bangalore"><option value="Kolkata"><option value="Chennai"><option value="Pune">
+        <option value="Jammu"><option value="Srinagar"><option value="Delhi"><option value="Mumbai"></option>
+        <option value="Hydrabad"><option value="Goa"><option value="Kochi"><option value="Leh"></option>
+      </datalist>
+      <input list="cities" type="text" ngModel name="destination" placeholder="Where to?">&nbsp;
+      <input type="date" ngModel name="departureDate" ><br><br>
+      <button style="color: rgb(255, 255, 255); background-color: rgb(27, 26, 27);" class="btn btn-primary">Search</button><br><br>
+    </form>
+    </div>
+ 
+      <h1 align="center">Flights</h1>
+    <table  align="center" id="tab">
+        <tr>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Fare</th>
+        </tr>
+        <tr *ngFor="let flights of data" (click)="getdetailsbyid([flights._id])">
+           <td>{{flights.origin}}</td> 
+            <td>{{flights.destination}}</td>
+            <td>{{flights.departureDate}}</td>
+            <td>₹{{flights.ticketPrice}}</td> 
+        </tr>
+    </table>
+    </div>

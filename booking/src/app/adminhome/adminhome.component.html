@@ -1,0 +1,29 @@
+<app-adminheader></app-adminheader>
+<div align="center">
+    <h2>All Tickets</h2>
+</div>
+<table id="tab" align="center">
+    <button id="adb" (click)="addflight()">Add Flight</button>
+    <tr>
+        <th>Flight Id</th>
+        <th>Airline</th>
+        <th>FlightNo</th>
+        <th>Origin</th>
+        <th>Departure</th>
+        <th>Destination</th>
+        <th>Arrival</th>
+        <th>Fare</th>
+    </tr>
+    <tr *ngFor="let flights of data">
+        <td>{{flights._id}}</td>
+        <td>{{flights.airline}}</td>
+        <td>{{flights.flightNo}}</td>
+        <td>{{flights.origin}}</td>
+        <td>{{flights.departureDateAndTime}}</td>
+        <td>{{flights.destination}}</td>
+        <td>{{flights.arrivalDateAndTime}}</td>
+        <td>₹{{flights.ticketPrice}}</td>
+        <td><button id="btn" (click)="gotoupdate([flights._id])">Update</button></td>
+        <td><button id="cbtn" (click)="deletef([flights._id])">Delete</button></td>
+    </tr>
+</table>

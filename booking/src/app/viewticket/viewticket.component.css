@@ -1,0 +1,42 @@
+#tab{
+  font-family: Arial, Helvetica, sans-serif;
+  
+  width: 90%;
+  padding-top: 10pt;
+  border-collapse: collapse;
+}
+ #tab th {
+  padding: 8px;
+  text-align: center;
+  border-radius: 20pt;
+}
+  
+#tab th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  
+  background-color: #000000;
+  color: white;
+  border-bottom: 1px solid rgb(172, 172, 172);
+  
+}
+#tab tr{
+  text-align: center;
+  
+  
+}
+#tab tr:hover {background-color: #ddd;}
+td #btn:hover{background-color: rgba(43, 205, 226, 0.692);
+}
+td #btn,td #cbtn{
+  padding: 10pt;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20pt;
+  border:0pt
+}
+td #cbtn:hover{background-color: rgba(255, 0, 0, 0.692);
+}
+td{
+  border: 1px solid rgb(172, 172, 172);
+  
+}

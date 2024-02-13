@@ -1,0 +1,21 @@
+<app-header></app-header>
+<button id="adb" (click)="gotoadmin()" >Admin Login</button>
+<div style="height: 600px;">
+
+<div align="center">
+  <br><br><br>
+<div  style="width: 17%; border-style: solid; height: 200pt; border-radius: 30pt;"  >
+  <h3>User Login</h3>
+    <form    #regisForm="ngForm" (ngSubmit)="postdetails(regisForm.value)">
+      <br><br><input  type="text" required ngModel name="username"  placeholder="Enter UserName" ><br><br><br>
+    <input type="password" required ngModel name="password" placeholder="Enter Password"><br><br><br><br>
+      <button style="color: rgb(255, 255, 255); background-color: rgb(27, 26, 27);" 
+      [disabled]="!regisForm.form.valid" class="btn btn-primary">Login</button><br><br>
+    </form>
+  </div>
+</div>
+<div align="center">
+  <h3>Not Registered?</h3><a class="btn" href="/signup" role="button"> Signup</a>
+</div>
+</div>
+

@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div style="height: 800px;">
+
+<div align="center">
+   <h2>User Registration</h2>
+<div style="width: 20%; border-style: solid; height: 300pt; border-radius: 30pt;">
+    <form  align="center" #regisForm="ngForm" 
+     (ngSubmit)= "postdetails(regisForm.value)">
+      <h3>UserName</h3><input  type="text" minlength="5" required ngModel #username="ngModel" name="username" placeholder="Enter UserName" ><br>
+      <span *ngIf = "username.invalid && username.touched"
+      class="error">*type username, minimum 5 letters</span>
+      <h3>Email</h3><input type="email" email required ngModel 
+      #email="ngModel" name="email" placeholder="Enter Email"><br>
+      <span *ngIf = "email.invalid && email.touched"
+      class="error">*type valid Email</span>
+      <h3>Password</h3><input type="password" minlength="5" required ngModel #password="ngModel" name="password" placeholder="Enter Password"><br>
+      <span *ngIf = "password.invalid && password.touched"
+      class="error">*type Password, minimum 5 letters</span><br><br>
+      <button style="color: rgb(255, 255, 255); background-color: rgb(27, 26, 27);" 
+      [disabled]="!regisForm.form.valid" class="btn btn-primary">Submit</button><br><br>
+    </form>
+</div>
+</div>
+<div align="center">
+  <h3>Already Registered? </h3><a class="btn" href="http://localhost:4200/login" role="button">Login</a>
+</div>
+</div>

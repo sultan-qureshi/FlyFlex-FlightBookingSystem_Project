@@ -1,0 +1,28 @@
+<app-header></app-header>
+<br><br><br>
+<h3 align="center">Flight Details</h3>
+    <table border="1" align="center" id="tab">
+       
+        <tr>
+            <th>Airline</th>
+            <th>FlightNo</th>
+            <th>Origin</th>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>Arrival</th>
+            <th>TicketPrice(₹)</th>
+        </tr>
+        <tr>
+            <td>{{f1data.airline}}</td> 
+            <td>{{f1data.flightNo}}</td>
+            <td>{{f1data.origin}}</td>
+            <td>{{f1data.departureDateAndTime}}</td> 
+            <td>{{f1data.destination}}</td>
+            <td>{{f1data.arrivalDateAndTime}}</td>
+            <td>{{f1data.ticketPrice}}</td>
+        </tr>
+    </table>
+<div align="center">
+    <br>
+    <button id="btn"  (click)="gotobooking()">Book</button>
+</div>
