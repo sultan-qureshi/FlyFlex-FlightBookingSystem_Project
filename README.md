@@ -39,14 +39,14 @@ To run FlyFlex locally, follow these steps:
    - Navigate to the `EurekaServer` directory and Build and run `java -jar target/EurekaServer-0.0.1-SNAPSHOT.jar`
 5. Start the microservices:
    - For each microservice, navigate to its respective directory Build and run `java -jar target/microservice-name-0.0.1-SNAPSHOT.jar`
-6. Start the Angular application: 
-   - Navigate to the `booking` directory and run `ng serve`
-7. Access the application: 
-   - Visit `http://localhost:4200` in your web browser to access the FlyFlex application
-8. Explore endpoints:
+6. Explore endpoints:
    - Check the Eureka server home page (`http://localhost:8761`) to view and explore available endpoints for each microservice
+7. Start the Angular application: 
+   - Navigate to the `FlyFlex-UI` directory and run `ng serve`
+7. Access the application: 
+   - Visit `http://localhost:4200` in your web browser to access the FlyFlex application.
 
 
 ## Contributing
 
-Contributions are welcome! Feel free to submit pull requests or open issues for any improvements or features you'd like to see in FlyFlex.
+Contributions are welcome! Feel free to submit pull requests for any improvements or features you'd like to see in the Project.

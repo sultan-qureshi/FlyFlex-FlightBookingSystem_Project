@@ -27,7 +27,7 @@ public class FlightServiceController {
 	
 	@GetMapping("/")
 	public String home() {
-		return "Welocome to Flight Service";
+		return "Welocome to the FlyFlex";
 	}
 	@GetMapping("/findallflights")
 	public List<Flight> getAllFlights(){

@@ -5,11 +5,11 @@
 
 </div>
     <div style="margin-top: -7%;">
-    <h1 align="center" style="color: indigo;">Flight Booking Site</h1>
+    <h1 align="center" style="color: indigo;">FlyFlex</h1>
     </div>
-    
- 
-   
+
+
+
     <div>
     <form  align="center" #simpleForm="ngForm" (ngSubmit)="getdetails(simpleForm.value)">
       <input list="cities" type="text" ngModel name="origin" placeholder="Where from?" >&nbsp;
@@ -23,7 +23,7 @@
       <button style="color: rgb(255, 255, 255); background-color: rgb(27, 26, 27);" class="btn btn-primary">Search</button><br><br>
     </form>
     </div>
- 
+
       <h1 align="center">Flights</h1>
     <table  align="center" id="tab">
         <tr>
@@ -33,10 +33,10 @@
             <th>Fare</th>
         </tr>
         <tr *ngFor="let flights of data" (click)="getdetailsbyid([flights._id])">
-           <td>{{flights.origin}}</td> 
+           <td>{{flights.origin}}</td>
             <td>{{flights.destination}}</td>
             <td>{{flights.departureDate}}</td>
-            <td>₹{{flights.ticketPrice}}</td> 
+            <td>₹{{flights.ticketPrice}}</td>
         </tr>
     </table>
     </div>

@@ -14,21 +14,21 @@ public class Flight {
 	@Id
 	private String _id; 	 
 	@Field
-	private String FlightNo;
+	private String flightNo;
 	@Field
-	private String Airline;
+	private String airline;
 	@Field
-	private String Origin;
+	private String origin;
 	@Field
-	private String Destination;
+	private String destination;
 	@Field
-	private LocalDate DepartureDate;
+	private LocalDate departureDate;
 	@Field
-	private LocalDateTime DepartureDateAndTime;
+	private LocalDateTime departureDateAndTime;
 	@Field
-	private LocalDateTime ArrivalDateAndTime;
+	private LocalDateTime arrivalDateAndTime;
 	@Field
-	private double TicketPrice;
+	private double ticketPrice;
 	
 	
 	public Flight() {
@@ -39,14 +39,14 @@ public class Flight {
 			double ticketPrice) {
 		super();
 		this._id = _id;
-		FlightNo = flightNo;
-		Airline = airline;
-		Origin = origin;
-		Destination = destination;
-		DepartureDate = departureDate;
-		DepartureDateAndTime = departureDateAndTime;
-		ArrivalDateAndTime = arrivalDateAndTime;
-		TicketPrice = ticketPrice;
+		this.flightNo = flightNo;
+		this.airline = airline;
+		this.origin = origin;
+		this.destination = destination;
+		this.departureDate = departureDate;
+		this.departureDateAndTime = departureDateAndTime;
+		this.arrivalDateAndTime = arrivalDateAndTime;
+		this.ticketPrice = ticketPrice;
 	}
 
 
@@ -63,83 +63,83 @@ public class Flight {
 
 
 	public String getFlightNo() {
-		return FlightNo;
+		return flightNo;
 	}
 
 
 	public void setFlightNo(String flightNo) {
-		FlightNo = flightNo;
+		this.flightNo = flightNo;
 	}
 
 
 	public String getAirline() {
-		return Airline;
+		return airline;
 	}
 
 
 	public void setAirline(String airline) {
-		Airline = airline;
+		this.airline = airline;
 	}
 
 
 	public String getOrigin() {
-		return Origin;
+		return origin;
 	}
 
 
 	public void setOrigin(String origin) {
-		Origin = origin;
+		this.origin = origin;
 	}
 
 
 	public String getDestination() {
-		return Destination;
+		return destination;
 	}
 
 
 	public void setDestination(String destination) {
-		Destination = destination;
+		this.destination = destination;
 	}
 
 
 	public LocalDateTime getDepartureDateAndTime() {
-		return DepartureDateAndTime;
+		return departureDateAndTime;
 	}
 
 
 	public void setDepartureDateAndTime(LocalDateTime departureDateAndTime) {
-		DepartureDateAndTime = departureDateAndTime;
+		this.departureDateAndTime = departureDateAndTime;
 	}
 
 
 	public LocalDate getDepartureDate() {
-		return DepartureDate;
+		return departureDate;
 	}
 
 
 	public void setDepartureDate(LocalDate departureDate) {
 		
-		DepartureDate = departureDate;
+		this.departureDate = departureDate;
 	}
 
 
 	public LocalDateTime getArrivalDateAndTime() {
-		return ArrivalDateAndTime;
+		return arrivalDateAndTime;
 	}
 
 
 	public void setArrivalDateAndTime(LocalDateTime arrivalDateAndTime) {
-		ArrivalDateAndTime = arrivalDateAndTime;
+		this.arrivalDateAndTime = arrivalDateAndTime;
 	}
 
 
 	public double getTicketPrice() {
-		return TicketPrice;
+		return ticketPrice;
 	}
 
 
 	public void setTicketPrice(double ticketPrice) {
-		TicketPrice = ticketPrice;
+		this.ticketPrice = ticketPrice;
 	}
 	
 }

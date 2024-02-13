@@ -14,19 +14,19 @@ public class Flight {
 	@Id
 	private String _id; 	 
 	@Field
-	private String FlightNo;
+	private String flightNo;
 	@Field
-	private String Airline;
+	private String airline;
 	@Field
-	private String Origin;
+	private String origin;
 	@Field
-	private String Destination;
+	private String destination;
 	@Field
-	private LocalDate DepartureDate;
+	private LocalDate departureDate;
 	@Field
-	private LocalDateTime DepartureDateAndTime;
+	private LocalDateTime departureDateAndTime;
 	@Field
-	private LocalDateTime ArrivalDateAndTime;
+	private LocalDateTime arrivalDateAndTime;
 	@Field
 	private double TicketPrice;
 	public Flight() {
@@ -38,13 +38,13 @@ public class Flight {
 			double ticketPrice) {
 		super();
 		this._id = _id;
-		FlightNo = flightNo;
-		Airline = airline;
-		Origin = origin;
-		Destination = destination;
-		DepartureDate = departureDate;
-		DepartureDateAndTime = departureDateAndTime;
-		ArrivalDateAndTime = arrivalDateAndTime;
+		this.flightNo = flightNo;
+		this.airline = airline;
+		this.origin = origin;
+		this.destination = destination;
+		this.departureDate = departureDate;
+		this.departureDateAndTime = departureDateAndTime;
+		this.arrivalDateAndTime = arrivalDateAndTime;
 		TicketPrice = ticketPrice;
 	}
 
@@ -53,31 +53,31 @@ public class Flight {
 	}
 
 	public String getFlightNo() {
-		return FlightNo;
+		return flightNo;
 	}
 
 	public String getAirline() {
-		return Airline;
+		return airline;
 	}
 
 	public String getOrigin() {
-		return Origin;
+		return origin;
 	}
 
 	public String getDestination() {
-		return Destination;
+		return destination;
 	}
 
 	public LocalDate getDepartureDate() {
-		return DepartureDate;
+		return departureDate;
 	}
 
 	public LocalDateTime getDepartureDateAndTime() {
-		return DepartureDateAndTime;
+		return departureDateAndTime;
 	}
 
 	public LocalDateTime getArrivalDateAndTime() {
-		return ArrivalDateAndTime;
+		return arrivalDateAndTime;
 	}
 
 	public double getTicketPrice() {
