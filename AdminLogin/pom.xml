@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>CaseStudy</groupId>
-	<artifactId>UserLogin</artifactId>
+	<artifactId>AdminLogin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>UserLogin</name>
+	<name>AdminLogin</name>
 	<description>Admin Service</description>
 	<properties>
 		<java.version>11</java.version>
